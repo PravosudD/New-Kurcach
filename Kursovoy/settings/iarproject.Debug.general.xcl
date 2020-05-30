@@ -1,0 +1,15 @@
+"C:\Dima\IAR 40.2\arm\bin\armproc.dll" 
+
+"C:\Dima\IAR 40.2\arm\bin\armstlink2.dll" 
+
+"C:\Users\infor\Desktop\Kursovay-rabota-master\Kursovoy\Debug\Exe\iarproject.out" 
+
+--plugin="C:\Dima\IAR 40.2\arm\bin\armbat.dll" 
+
+--device_macro="C:\Dima\IAR 40.2\arm\config\debugger\ST\STM32F4xx.dmac" 
+
+--flash_loader="C:\Dima\IAR 40.2\arm\config\flashloader\ST\FlashSTM32F411xE.board" 
+
+
+
+
