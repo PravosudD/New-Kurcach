@@ -45,6 +45,8 @@ GPIOA::MODER::MODER0::Analog::Set();
 RCC::APB1ENR::USART2EN::Enable::Set() ;
 GPIOA::MODER::MODER2::Alternate::Set(); //Alternate moder 2
 GPIOA::MODER::MODER3::Alternate::Set(); //Alternate moder 3
+GPIOA::AFRL::AFRL2::Af7::Set(); //A2
+GPIOA::AFRL::AFRL3::Af7::Set(); //A3
 return 1;
 }
 }
