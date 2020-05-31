@@ -2392,7 +2392,7 @@
             <name>$PROJ_DIR$\Application\BluetoothFormats.hpp</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\MyTask\BluetoothTask.hpp</name>
+            <name>$PROJ_DIR$\Application\BluetoothTask.hpp</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Application\Filter.hpp</name>

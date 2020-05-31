@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Dima\IAR 40.2\common\bin\cspybat" -f "C:\Users\infor\Desktop\Kursovay-rabota-master\Kursovoy\settings\iarproject.Debug.general.xcl" --backend -f "C:\Users\infor\Desktop\Kursovay-rabota-master\Kursovoy\settings\iarproject.Debug.driver.xcl" 
+& "C:\Dima\IAR 40.2\common\bin\cspybat" -f "C:\Users\infor\Desktop\New-Kurcach\Kursovoy\settings\iarproject.Debug.general.xcl" --backend -f "C:\Users\infor\Desktop\New-Kurcach\Kursovoy\settings\iarproject.Debug.driver.xcl" 
 }
 else
 {
-& "C:\Dima\IAR 40.2\common\bin\cspybat" -f "C:\Users\infor\Desktop\Kursovay-rabota-master\Kursovoy\settings\iarproject.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\infor\Desktop\Kursovay-rabota-master\Kursovoy\settings\iarproject.Debug.driver.xcl" 
+& "C:\Dima\IAR 40.2\common\bin\cspybat" -f "C:\Users\infor\Desktop\New-Kurcach\Kursovoy\settings\iarproject.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\infor\Desktop\New-Kurcach\Kursovoy\settings\iarproject.Debug.driver.xcl" 
 }

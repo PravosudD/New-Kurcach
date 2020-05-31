@@ -4,6 +4,7 @@
 #include <array> //For std::array
 //#include "BluetoothFormat.hpp"
 #include "VariableTask.hpp"
+#include "BluetoothFormats.hpp"
 #include "susudefs.hpp" // for SusuString
 #include "Filter.hpp"
 #include "USART.hpp"
@@ -17,12 +18,16 @@ using namespace::OsWrapper ;
 
 template <typename myUSART, auto& myVariableTask>
 
-
 class BluetoothTask : public OsWrapper::Thread<512>
 {
   private:
 
+  BluetoothFormats bluetoothformat;  
+  float filtervlaznost = 0.0f;
+  char* rezault;  
+  
   public:
+    
   void Execute() override
   {
 
@@ -34,13 +39,15 @@ class BluetoothTask : public OsWrapper::Thread<512>
     USART2Config.samplingmode = SamplingMode::Mode8 ;
     myUSART::Config(USART2Config);
     myUSART::On();
-    
+
     for( ; ;)
     {
-      myVariableTask.GetFilterValue();
+     filtervlaznost = myVariableTask.GetFilterValue();
          Sleep(1000ms);
      std::cout << "FilterVlaznost: " <<  myVariableTask.GetFilterValue() << std::endl;
-      
+     char* rezault = bluetoothformat.Getbluetoothformat(filtervlaznost);
+     myUSART::SendData(rezault, strlen(rezault));
+     
     }
   }
 };
