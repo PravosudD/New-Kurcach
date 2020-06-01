@@ -1,21 +1,21 @@
 #pragma once
 
 #include "USARTConfig.hpp" // for UsartConfig, tParity, tBitsSize
-// #include <cmath> //for USARTDIV
 #include "usart2registers.hpp"
 
 template <typename USARTModule, uint32_t ClockSpeed>
 
-class USART {
-
+class USART 
+{
 public:  
-
-  static void On() {
+  static void On() 
+  {
     USARTModule::CR1::UE::Enable::Set() ; 
     USARTModule::CR1::TE::Enable::Set() ;   
   }
 
-  static void Config(UsartConfig config) {
+  static void Config(UsartConfig config) 
+  {
     SetSamplingMode (config.samplingmode) ;
     SetSpeed (config.speed) ;  
     SetStopBits (config.stopbits) ;
@@ -23,9 +23,11 @@ public:
     SetParity (config.parity) ;
   }
   
-  static void SendData (char* ptr, uint16_t size) {
+  static void SendData (char* ptr, uint16_t size) 
+  {
     assert(size > 0);
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++) 
+    {
       SendByte(*ptr);
       ptr++ ;
     }
@@ -33,14 +35,18 @@ public:
 
 private:
 
-    static void SendByte(uint8_t Byte) {
-    while (!USARTModule::SR::TXE::DataRegisterEmpty::IsSet()) {
+  static void SendByte(char ptr) 
+  {
+    while (!USARTModule::SR::TXE::DataRegisterEmpty::IsSet()) 
+    {
     } ;
-    USARTModule::DR::Write(Byte) ;
+    USARTModule::DR::Write(ptr) ;
   }
   
-  static void SetStopBits(StopBits stopbits) {
-    switch (stopbits) {
+  static void SetStopBits(StopBits stopbits) 
+  {
+    switch (stopbits) 
+    {
       case StopBits::OneBit:
         USARTModule::CR2::STOP::OneStopBit::Set() ;
         break ; 
@@ -55,8 +61,10 @@ private:
     }
   } 
 
-  static void SetBitsSize(BitsSize bitssize) {   
-      switch (bitssize) {
+  static void SetBitsSize(BitsSize bitssize) 
+  {
+    switch (bitssize) 
+    {
       case BitsSize::Bits8:
         USARTModule::CR1::M::Data8bits::Set() ;
         break ;
@@ -68,13 +76,15 @@ private:
       default:
         assert(false) ;
         break ;
-      }
+    }
   }
 
   inline static uint32_t over8 = 0 ;
 
-    static void SetSamplingMode(SamplingMode samplingmode) {
-      switch (samplingmode) {
+  static void SetSamplingMode(SamplingMode samplingmode) 
+  {
+    switch (samplingmode) 
+    {
       case SamplingMode::Mode16:
         USARTModule::CR1::OVER8::OversamplingBy16::Set() ;
         over8 = 0 ;
@@ -88,11 +98,13 @@ private:
       default:
         assert(false) ;
         break ;
-      }
     }
+  }
 
-   static void SetParity(Parity parity) {  
-      switch (parity) {
+  static void SetParity(Parity parity) 
+  {  
+    switch (parity) 
+    {
       case Parity::Even:
         USARTModule::CR1::PCE::ParityControlEnable::Set() ;
         USARTModule::CR1::PS::ParityEven::Set() ;
@@ -110,41 +122,42 @@ private:
       default:
         assert(false) ;
         break ;
-      }
     }
+  }
     
-    static void SetSpeed(Speed speed) {
+  static void SetSpeed(Speed speed) 
+  {
     uint32_t speednum ;
-      switch (speed) {
+    switch (speed) 
+    {
       case Speed::Speed2400:
-      speednum = 2400 ;
+        speednum = 2400 ;
         break ;
 
       case Speed::Speed4800:
-      speednum = 4800 ;
+        speednum = 4800 ;
         break ;
 
       case Speed::Speed9600:
-      speednum = 9600 ;
+        speednum = 9600 ;
         break ;
 
       case Speed::Speed19200:
-      speednum = 19200 ;
+        speednum = 19200 ;
         break ;
 
       case Speed::Speed38400:
-      speednum = 38400 ;
+        speednum = 38400 ;
         break ;
 
       default:
         assert(false) ;
         break ;
 
-      }      
-
+    }      
       // 208 = 16000000/ (9600*8*(2-1)) ;
        uint32_t USARTDIVMANT = ClockSpeed/(speednum*8*(2-over8)) ;
        uint32_t USARTDIVFRACT = 16 * (ClockSpeed % (speednum*8*(2-over8)))/(speednum*8*(2-over8));
        USARTModule::BRR::Write((USARTDIVMANT<<4) | USARTDIVFRACT) ;  
   }
-} ;
+};

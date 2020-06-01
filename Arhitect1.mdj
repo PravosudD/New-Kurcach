@@ -31,7 +31,7 @@
 							"top": 8,
 							"width": 529,
 							"height": 270,
-							"text": "VariableTask раз в 100 мс запрашивает отфильтрованное цифровое значение напряжения с ADC. Получает данные ADC.\nVariableTask передаёт код Adc на Vlagnost, Adc преобразует аналоговый сигнал с канала VariableTask, и передаёт полученный цифровой сигнал обратнро.  \nVariableTask передает значение влажности на Filter. \nFilter производит фильтрацию значения влажности и возвращает данные в VariableTask.\nVariableTask передает в MailBox отфильтрованное значение влажности.\n.\nBluetoothTask считывает сообщения MailBox с отфильтрованным значением влажности VariableTask раз в 1000мс. \nBluetoothFormat получает считанное значение с BluetoothTask и преобразует отфильтрованное значение влажности в строку вида:\nВлажность:   [ЗНАЧЕНИЕ ВЛАЖНОСТИ] %.\nBluetoothFormat возвращает строку в BluetoothTask.\nBluetoothTask запрашивает у USART2 передачу. \n"
+							"text": "VariableTask раз в 100 мс запрашивает отфильтрованное цифровое значение напряжения с ADC. Получает данные ADC.\nVariableTask передаёт код Adc на Vlagnost, Adc преобразует аналоговый сигнал с канала VariableTask, и передаёт полученный цифровой сигнал обратнро.  \nVariableTask передает значение влажности на Filter. \nFilter производит фильтрацию значения влажности и возвращает данные в VariableTask.\nVariableTask передает в MailBox отфильтрованное значение влажности.\n.\nBluetoothTask считывает отфильтрованным значением влажности VariableTask раз в 1000мс. \nBluetoothFormat получает считанное значение с BluetoothTask и преобразует отфильтрованное значение влажности в строку вида:\nВлажность:   [ВЛАЖНОСТЬ] %.\nBluetoothFormats возвращает строку в BluetoothTask.\nBluetoothTask запрашивает у USART2 передачу. \n"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -10539,16 +10539,6 @@
 									"name": "rezault",
 									"visibility": "private",
 									"type": "char*"
-								},
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAFyZzeTB+oYQ4U=",
-									"_parent": {
-										"$ref": "AAAAAAFxZ9sf/bxYBy4="
-									},
-									"name": "filtervlaznost",
-									"visibility": "private",
-									"type": "float"
 								}
 							],
 							"operations": [
@@ -10930,7 +10920,9 @@
 										"$ref": "AAAAAAFxZ9pZg7uMVHY="
 									},
 									"name": "myADC",
-									"type": "ADC template"
+									"type": {
+										"$ref": "AAAAAAFxZ6GBZwBKGTQ="
+									}
 								}
 							],
 							"operations": [
@@ -13041,30 +13033,13 @@
 											"height": 13,
 											"text": "-rezault: char*",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFyZzeTceobJCM=",
-											"_parent": {
-												"$ref": "AAAAAAFxZ9sgALxgZmc="
-											},
-											"model": {
-												"$ref": "AAAAAAFyZzeTB+oYQ4U="
-											},
-											"font": "Arial;13;0",
-											"left": 589,
-											"top": 416,
-											"width": 300.22998046875,
-											"height": 13,
-											"text": "-filtervlaznost: float",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 584,
 									"top": 364,
 									"width": 310.22998046875,
-									"height": 70
+									"height": 55
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -13087,7 +13062,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 589,
-											"top": 439,
+											"top": 424,
 											"width": 300.22998046875,
 											"height": 13,
 											"text": "+Execute(): void",
@@ -13104,7 +13079,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 589,
-											"top": 454,
+											"top": 439,
 											"width": 300.22998046875,
 											"height": 13,
 											"text": "+BluetoothTask(FilteredValue: myVariableTask&)",
@@ -13131,7 +13106,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 584,
-									"top": 434,
+									"top": 419,
 									"width": 310.22998046875,
 									"height": 38
 								},
@@ -13486,7 +13461,7 @@
 											"top": 336,
 											"width": 205.896484375,
 											"height": 13,
-											"text": "+myADC: ADC template",
+											"text": "+myADC: ADC",
 											"horizontalAlignment": 0
 										}
 									],
@@ -13906,7 +13881,7 @@
 							"top": 176,
 							"width": 305,
 							"height": 219,
-							"text": "BluetoothTask\nExecute() забирает значения filtervlaznost из VariableTask каждые 1000 мс,  вызывает метод BluetoothFormat, получает из него строку с влажностью и отдает ее на Usart\nrezault, filtervlaznost: переменные используемые для приёма и передачи.\n"
+							"text": "BluetoothTask\nExecute() забирает значения filtervlaznost из VariableTask каждые 1000 мс,  вызывает метод BluetoothFormat, получает из него строку с влажностью и отдает ее на Usart\nrezault: переменная используемая для приёма и передачи.\n"
 						},
 						{
 							"_type": "UMLNoteView",

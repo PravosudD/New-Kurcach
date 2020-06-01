@@ -2,7 +2,6 @@
 
 #include "dma2registers.hpp"
 
-
 template<class D>
 class DMA
 {
@@ -19,9 +18,7 @@ public:
   }
   
   static void DataSizeSet() //Ustanavlivaem ob'emi pamati periferii i pamaty
-
   {
-
     D::S0NDTR::NDT::Set(1);
     D::S0CR::MSIZE::Value2::Set();
     D::S0CR::MINC::Value1::Set();
